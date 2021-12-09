@@ -1,0 +1,36 @@
+#menu{
+	position:fixed;
+	background-color:#FFC286;
+	height:100%;
+	z-index:10;
+	width:280px;
+	color:#2a2a2a;
+	top:20%;
+	opacity:1;
+	list-style:none;
+	font-family: 'Recoleta';
+}
+#menu ul{
+	margin-top:0;
+}
+.lista_menu{
+    border-bottom: 1px solid #2a2a2a;
+	padding: 10px;
+}
+.total_precio {
+	margin: 10px;
+}
+.right{
+    right:-280px;
+}
+.show{
+    right:0;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+
+}
+@font-face {
+	font-family: 'Recoleta';
+	src: url(../fuentes/Recoleta-RegularDEMO.otf);
+}

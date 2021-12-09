@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box; 
+}
+body {
+    font-family: 'Lato', 'Arial', 'Heveltica', sans-serif;
+    background-color: #FFF;
+}
+nav {
+    position: fixed;
+    z-index: 99999;
+    background-color: #FFF;
+}
+a, span {
+    font-family: 'Recoleta';
+}
+span :not(#usuario) {
+    font-size: 24px;
+    text-align: center;
+}
+.nav-link{
+    color: #66806A;
+}
+.nav-link:hover{
+    color: #FFC286;
+}
+
+h1{
+    font-family: 'Recoleta';
+    text-align: center;
+    color: #66806A;
+}
+h5 {
+    color: #66806A;
+    font-family: 'Recoleta';
+}
+.nav {
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 1rem;
+}
+.container {
+    padding-top: 120px;
+}
+#main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.card {
+    margin: 1rem 0;
+    width: 18rem;
+}
+.btn-primary {
+    background-color: #66806A;
+    border-color: #66806A;
+}
+.btn-primary:hover {
+    background-color: #FFC286;
+    border-color: #FFC286;
+    color: #66806A;
+}
+.btn-primary:active {
+    background-color: #66806A;
+    border-color: #FFC286;
+    color: #FFC286;
+}
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem white;
+}
+.fa-shopping-bag {
+    font-size: 1.5rem;
+    color: #66806A;
+    margin: 0 10px;
+}
+.precio {
+    color: #66806A;
+    margin-left: 40px;
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'Recoleta';
+    src: url(../fuentes/Recoleta-RegularDEMO.otf);
+}
