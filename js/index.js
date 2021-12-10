@@ -81,6 +81,11 @@ function comprarProducto(item) {
     } 
 }
 
+// Animación del h1
+$("h1").fadeOut("slow", () =>{
+    $("h1").fadeIn(3000)
+});
+
 // Menú Vertical 
 
 //Creo el evento de click sobre la bolsa para saber cúal es el contenido del carrito
