@@ -25,10 +25,15 @@
 }
 .show{
     right:0;
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	transition: all 0.3s ease;
-
+}
+#shop {
+	padding: 5px 10px;
+	background-color: #66806A;
+	color: #FFF;
+	border: 1px solid #66806A;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
 }
 @font-face {
 	font-family: 'Recoleta';

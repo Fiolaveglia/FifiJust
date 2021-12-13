@@ -33,11 +33,12 @@ const eucalipto = new Aceite (12,"Eucalipto", "Herbal", 1175, 10);
 //Agrego los productos creados al array items
 items.push(bergamota, naranja, limon, neroli, jazmin, geranio, manzanilla, plamarosa, patchouli, romero, menta, eucalipto); 
 
+// Animación del h1
+$("h1").fadeOut("slow", () =>{
+    $("h1").fadeIn(3000)
+});
 //Selecciono el contenedor donde voy a instertar las cards 
 let contenedor = document.getElementById("main"); 
-
-
-
 
 //Por cada item guardado en el array creo un div con la class "card" donde me cree por cada item del array una tarjeta 
 for (const item of items) {
@@ -81,13 +82,7 @@ function comprarProducto(item) {
     } 
 }
 
-// Animación del h1
-$("h1").fadeOut("slow", () =>{
-    $("h1").fadeIn(3000)
-});
-
-// Menú Vertical 
-
+//Menú vertical 
 //Creo el evento de click sobre la bolsa para saber cúal es el contenido del carrito
 $("#usuario").on("click", function(e){
     $("#menu").toggleClass("show");
