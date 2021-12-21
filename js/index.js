@@ -98,20 +98,31 @@ $("#usuario").on("click", function(e){
 //Función para obtener los datos guardados del carrito
 function obtenerCarrito () {
     let productosString = localStorage.getItem("productos"); 
+    console.log(productosString);
     let carrito = JSON.parse(productosString) || []; 
     productos = carrito; 
     let total = productos.reduce((sum, value)=> (typeof value.precio == "number" ? sum + value.precio : sum), 0); 
     mensaje.innerHTML = `$${total}<i id='bag' class='fas fa-shopping-bag'>`; 
-
-    for(producto of productos) {
-        let listado = document.getElementById("menu"); 
-        let lista = document.createElement("li");
-        lista.className ="lista_menu";
-        lista.innerHTML = `${producto.nombre} - $${producto.precio}`; 
-        listado.prepend(lista); 
-        $('.total_precio').html(`Total  $${total}`);
-
+    
+    let texto = $('#empty'); 
+    if (productosString === null) {
+        let btnDisabled = $('#shop'); 
+        texto.html("El carrito esta vacio");
+        btnDisabled.attr("disabled");
+        btnDisabled.css({'background-color':'gray', 'border' : '1px solid gray'})
+    } else {
+        for(producto of productos) {
+            texto.css({'visibility':'hidden'})
+            let listado = document.getElementById("menu"); 
+            let lista = document.createElement("li");
+            lista.className ="lista_menu";
+            lista.innerHTML = `${producto.nombre} - $${producto.precio}`; 
+            listado.prepend(lista); 
+            $('.total_precio').html(`Total  $${total}`);
+        }
+    
     }
+
 }
 
 obtenerCarrito();
