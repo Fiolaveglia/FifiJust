@@ -89,6 +89,17 @@ h5 {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
 }
+.swal2-title {
+    font-size: 1.25rem!important;
+
+}
+.swal2-styled.swal2-confirm {
+    background-color: rgb(255, 194, 134)!important;
+    padding: 0.25rem 0.75rem!important;
+}
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: 0 0 0 3px rgb(255, 194, 134, 50%)!important;
+}
 @font-face {
     font-family: 'Recoleta';
     src: url(../fuentes/Recoleta-RegularDEMO.otf);

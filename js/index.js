@@ -36,9 +36,6 @@ items.push(bergamota, naranja, limon, neroli, jazmin, geranio, manzanilla, plama
 //Selecciono el contenedor donde voy a instertar las cards 
 let contenedor = document.getElementById("main"); 
 
-
-
-
 //Por cada item guardado en el array creo un div con la class "card" donde me cree por cada item del array una tarjeta 
 for (const item of items) {
     let tarjeta = document.createElement("div"); 
@@ -78,7 +75,13 @@ function comprarProducto(item) {
         lista.innerHTML = `${item.nombre} - $${item.precio}`; 
         listado.prepend(lista);  
         $('.total_precio').html(`TOTAL $${total}`);
+
+        Swal.fire({
+            title:`Se ha agregado Aceite de ${item.nombre} al carrito`
+        })
+
     } 
+
 }
 
 // Animación del h1
