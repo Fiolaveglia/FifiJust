@@ -1,0 +1,80 @@
+[
+{
+    "id": 1,
+    "nombre": "Bergamota",
+    "categoria": "Cítrico",
+    "precio": 1015,
+    "stock": 10
+},
+{
+    "id": 2,
+    "nombre": "Naranja",
+    "categoria": "Cítrico",
+    "precio": 945,
+    "stock": 10
+},
+{
+    "id": 3,
+    "nombre": "Limon",
+    "categoria": "Cítrico",
+    "precio": 965,
+    "stock": 5
+}, 
+{
+    "id": 4,
+    "nombre": "Neroli",
+    "categoria": "Floral",
+    "precio": 1550,
+    "stock": 13
+},
+{
+    "id": 5,
+    "nombre": "Jazmin",
+    "categoria": "Floral",
+    "precio": 1015,
+    "stock": 8
+},
+{
+    "id": 6,
+    "nombre": "Geranio",
+    "categoria": "Floral",
+    "precio": 1445,
+    "stock": 9
+},
+{
+    "id": 7,
+    "nombre": "Manzanilla",
+    "categoria": "Floral",
+    "precio": 1325,
+    "stock": 10
+},
+{
+    "id": 8,
+    "nombre": "Palmarosa",
+    "categoria": "Herbal",
+    "precio": 1495,
+    "stock": 5
+},
+{
+    "id": 10,
+    "nombre": "Romero",
+    "categoria": "Herbal",
+    "precio": 1495,
+    "stock": 8
+},
+{
+    "id": 11,
+    "nombre": "Menta",
+    "categoria": "Herbal",
+    "precio": 1280,
+    "stock": 6
+},
+{
+    "id": 12,
+    "nombre": "Eucalipto",
+    "categoria": "Herbal",
+    "precio": 1095,
+    "stock": 7
+}
+
+]
