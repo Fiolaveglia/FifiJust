@@ -89,6 +89,19 @@ h5 {
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
+    transition: all 1s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+#shop:hover {
+    background-color: #FFF;
+    color: #66806A;
+}
+#shop:active {
+    background-color: #FFF1AF;
+    color: #66806A;
 }
 #empty {
     padding: 10px 0;

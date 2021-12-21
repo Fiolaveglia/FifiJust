@@ -105,14 +105,16 @@ function obtenerCarrito () {
     mensaje.innerHTML = `$${total}<i id='bag' class='fas fa-shopping-bag'>`; 
     
     let texto = $('#empty'); 
+    let btnDisabled = $('#shop'); 
+
     if (productosString === null) {
-        let btnDisabled = $('#shop'); 
         texto.html("El carrito esta vacio");
         btnDisabled.attr("disabled");
-        btnDisabled.css({'background-color':'gray', 'border' : '1px solid gray'})
+        btnDisabled.css({'background-color':'gray', 'border' : '1px solid gray'});
     } else {
         for(producto of productos) {
-            texto.css({'visibility':'hidden'})
+            texto.css({'visibility':'hidden'});
+            btnDisabled.removeAttr("disabled");
             let listado = document.getElementById("menu"); 
             let lista = document.createElement("li");
             lista.className ="lista_menu";
