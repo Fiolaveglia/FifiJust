@@ -19,7 +19,7 @@ a {
     color: #66806A;
 }
 .nav-link:hover{
-    color: #FFC286;
+    color: #FFF1AF;
 }
 
 h1{
@@ -83,7 +83,7 @@ h5 {
 }
 #contador{
     font-size: 14px;
-    background-color: #FFF1AF;
+    background-color: #FFC286;
     display: inline-block;
     text-align: center;
     vertical-align: top;

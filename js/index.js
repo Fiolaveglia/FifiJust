@@ -1,12 +1,8 @@
-
 $(document).ready();
 
 // Variables 
 let items = []; // Array para cargar todos los items
 let productos = []; // Array para guardar los productos del carrito
-
-//const url = "http://127.0.0.1:5500/js/productos.json";
-
 
 // Clases 
 class Aceite {
@@ -40,16 +36,10 @@ $.getJSON('../js/productos.json', function (data) {
     document.getElementById(`${item.id}`).addEventListener('click', () => comprarProducto(item)); 
 }})
 
-// Animación del h1
-$("h1").fadeOut("slow", () =>{
-    $("h1").fadeIn(3000)
-});
-
 //Creo el evento de click sobre la bolsa para saber cúal es el contenido del carrito
 $("#usuario").on("click", function(e){
     $('#menu').toggleClass("show");
 });
-
 
 // Creo la función para guardar el carrito en LocalStorage
 function guardarCarrito (){
