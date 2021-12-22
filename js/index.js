@@ -58,6 +58,8 @@ function guardarCarrito (){
 } 
 
 let mensaje = document.getElementById("usuario"); 
+let contador = document.getElementById("contador");
+
 function comprarProducto(item) {
     if(item.stock == 0) {
         Swal.fire('El producto está agotado'); 
@@ -65,7 +67,7 @@ function comprarProducto(item) {
         productos.push(item);
         guardarCarrito();
         let total = productos.reduce((sum, value)=> (typeof value.precio == "number" ? sum + value.precio : sum), 0); 
-        mensaje.innerHTML = `$${total}<i id='bag' class='fas fa-shopping-bag'>`; 
+        contador.innerHTML = productos.length;
         item.stock--;
 
         let listado = document.getElementById("menu"); 
@@ -89,7 +91,7 @@ function obtenerCarrito () {
     let carrito = JSON.parse(productosString) || []; 
     productos = carrito; 
     let total = productos.reduce((sum, value)=> (typeof value.precio == "number" ? sum + value.precio : sum), 0); 
-    mensaje.innerHTML = `$${total}<i id='bag' class='fas fa-shopping-bag'>`; 
+    contador.innerHTML = productos.length;
     
     let texto = $('#empty'); 
     let btn = $('#shop'); 

@@ -12,12 +12,8 @@ nav {
     z-index: 99999;
     background-color: #FFF;
 }
-a, span {
+a {
     font-family: 'Recoleta';
-}
-span :not(#usuario) {
-    font-size: 24px;
-    text-align: center;
 }
 .nav-link{
     color: #66806A;
@@ -70,9 +66,8 @@ h5 {
 .btn-primary:focus {
     box-shadow: 0 0 0 0.25rem white;
 }
-
 .fa-shopping-bag {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: #66806A;
     margin: 0 10px;
 }
@@ -80,6 +75,25 @@ h5 {
     color: #66806A;
     margin-left: 40px;
     font-weight: 600;
+}
+#usuario {
+    position: absolute;
+    right: 73px;
+    top: 30px;
+}
+#contador{
+    font-size: 14px;
+    background-color: #FFF1AF;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 #shop {
     background-color: #66806A;
@@ -95,10 +109,6 @@ h5 {
     -ms-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
 }
-/*#shop:hover {
-    background-color: #FFF;
-    color: #66806A;
-}*/
 #shop:active {
     background-color: #FFF1AF;
     color: #66806A;
