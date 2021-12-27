@@ -9,8 +9,7 @@ body {
 }
 nav {
     position: fixed;
-    z-index: 99999;
-    background-color: #FFF;
+    z-index: 100;
 }
 a {
     font-family: 'Recoleta';
@@ -126,6 +125,41 @@ h5 {
 }
 .swal2-styled.swal2-confirm:focus {
     box-shadow: 0 0 0 3px rgb(255, 194, 134, 50%)!important;
+}
+/*Barra lateral*/
+div.pushbar {
+    background-color: #FFC286;
+    z-index: 99999;
+}
+.btn-cerrar>button {
+    border: transparent;
+    background-color: transparent;
+}
+.fa-times {
+    font-size: 1.25rem;
+    text-align: right;
+    color: #66806A;
+    margin: 10px;
+} 
+#menu{
+	background-color:#FFC286;
+	height:100%;
+	z-index:10;
+	width: auto;
+	color:#2a2a2a;
+	opacity:1;
+	list-style:none;
+	font-family: 'Recoleta';
+}
+#menu ul{
+	margin-top:0;
+}
+.lista_menu{
+    border-bottom: 1px solid #2a2a2a;
+	padding: 10px;
+}
+.total_precio {
+	margin: 10px;
 }
 @font-face {
     font-family: 'Recoleta';
