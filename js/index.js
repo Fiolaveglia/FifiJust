@@ -33,7 +33,8 @@ $.getJSON('../js/productos.json', function (data) {
                             <span class="precio">${item.precio}</span>
                         </div>`; 
     contenedor.append(tarjeta);  
-    document.getElementById(`${item.id}`).addEventListener('click', () => comprarProducto(item)); 
+        document.getElementById(`${item.id}`).addEventListener('click', () => comprarProducto(item)); 
+
 }})
 
 //Creo el evento de click sobre la bolsa para saber cúal es el contenido del carrito
@@ -63,7 +64,14 @@ function comprarProducto(item) {
         let listado = document.getElementById("menu"); 
         let lista = document.createElement("li");
         lista.className ="lista_menu";
-        lista.innerHTML = `${item.nombre} - $${item.precio}`; 
+        lista.innerHTML = `<div class="img-item">
+        <img src="../img/Aceites escenciales/${item.nombre}.jpg" class="img-cart" alt="${item.nombre}">
+        </div> 
+        <div class="items">
+        Aceite de ${item.nombre} - $${item.precio} 
+        </div>
+        <div class="eliminar"><i class="fas fa-trash"></i></div>`; 
+
         listado.prepend(lista);  
         $('.total_precio').html(`TOTAL $${total}`);
 
@@ -97,7 +105,13 @@ function obtenerCarrito () {
             let listado = document.getElementById("menu"); 
             let lista = document.createElement("li");
             lista.className ="lista_menu";
-            lista.innerHTML = `${producto.nombre} - $${producto.precio}`; 
+            lista.innerHTML = `<div class="img-item">
+            <img src="../img/Aceites escenciales/${producto.nombre}.jpg" class="img-cart" alt="${producto.nombre}">
+            </div> 
+            <div class="items">
+            Aceite de ${producto.nombre} - $${producto.precio} 
+            </div>
+            <div class="eliminar"><i class="fas fa-trash"></i></div>`; 
             listado.prepend(lista); 
             $('.total_precio').html(`Total  $${total}`);
         }
@@ -107,5 +121,7 @@ function obtenerCarrito () {
 }
 
 obtenerCarrito();
+
+
 
 

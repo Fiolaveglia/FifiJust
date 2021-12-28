@@ -35,6 +35,7 @@ h5 {
     justify-content: space-around;
     align-items: center;
     margin: 0 1rem;
+    background-color: #fff;
 }
 .container {
     padding-top: 120px;
@@ -94,6 +95,63 @@ h5 {
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
 }
+/*Alerta*/
+.swal2-title {
+    font-size: 1.25rem!important;
+
+}
+.swal2-styled.swal2-confirm {
+    background-color: rgb(255, 194, 134)!important;
+    padding: 0.25rem 0.75rem!important;
+}
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: 0 0 0 3px rgb(255, 194, 134, 50%)!important;
+}
+/*Barra lateral*/
+div.pushbar {
+    background-color: #FFF;
+    z-index: 99999;
+    padding: 0 10px;
+    width: 365px!important;
+}
+.btn-cerrar{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.btn-cerrar>button {
+    border: transparent;
+    background-color: transparent;
+}
+.fa-times {
+    font-size: 1.25rem;
+    text-align: right;
+    color: #66806A;
+    margin: 10px;
+}
+#menu{
+	height:100%;
+	z-index:10;
+	width: auto;
+	color:#66806A;
+	list-style:none;
+	font-family: 'Recoleta';
+}
+ul#menu{
+	margin-top:0;
+    padding-left: 0rem!important;
+}
+.lista_menu{
+    border-bottom: 1px solid rgba(112,112,112, 0.6);
+	padding: 10px;
+    width: 345px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.total_precio {
+	margin: 10px;
+}
 #shop {
     background-color: #66806A;
     color: #FFF;
@@ -115,51 +173,21 @@ h5 {
 #empty {
     padding: 10px 0;
 }
-.swal2-title {
-    font-size: 1.25rem!important;
-
-}
-.swal2-styled.swal2-confirm {
-    background-color: rgb(255, 194, 134)!important;
-    padding: 0.25rem 0.75rem!important;
-}
-.swal2-styled.swal2-confirm:focus {
-    box-shadow: 0 0 0 3px rgb(255, 194, 134, 50%)!important;
-}
-/*Barra lateral*/
-div.pushbar {
-    background-color: #FFC286;
-    z-index: 99999;
-}
-.btn-cerrar>button {
-    border: transparent;
-    background-color: transparent;
-}
-.fa-times {
-    font-size: 1.25rem;
-    text-align: right;
-    color: #66806A;
-    margin: 10px;
+.titulo {
+    font-family: 'Recoleta';
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 30px;
+    border-bottom: 1px solid rgba(112,112,112, 0.6);
+    margin-bottom: 20px;
 } 
-#menu{
-	background-color:#FFC286;
-	height:100%;
-	z-index:10;
-	width: auto;
-	color:#2a2a2a;
-	opacity:1;
-	list-style:none;
-	font-family: 'Recoleta';
+.img-cart {
+    width: 100px;
+    height: 70px;
 }
-#menu ul{
-	margin-top:0;
-}
-.lista_menu{
-    border-bottom: 1px solid #2a2a2a;
-	padding: 10px;
-}
-.total_precio {
-	margin: 10px;
+.fa-trash{
+    margin-left: 10px;
+    color:  rgb(112,112,112);
 }
 @font-face {
     font-family: 'Recoleta';
