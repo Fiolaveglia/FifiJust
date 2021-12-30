@@ -6,116 +6,141 @@ let productos = []; // Array para guardar los productos del carrito
 
 // Clases 
 class Aceite {
-    constructor(idProducto, nombre, categoria, precio, stock) {
-        this.idProducto = idProducto;
+    constructor(id, nombre, categoria, precio, stock) {
+        this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
-        this.precio = precio; 
-        this.stock = stock; 
+        this.precio = precio;
+        this.stock = stock;
     }
 }
 
 //Obtengo los productos por un llamado de AJAX 
 $.getJSON('../js/productos.json', function (data) {
     data.forEach(elemento => items.push(elemento));
-    
+
     //Selecciono el contenedor donde voy a instertar las cards 
-    let contenedor = document.getElementById("main"); 
-    //Por cada item guardado en el array creo un div con la class "card" donde me cree por cada item del array una tarjeta 
+    let contenedor = document.getElementById("main");
+    //Por cada item guardado en el array creo un div con la class "card" donde voy a pintar los items en el HTML
     for (const item of items) {
-    let tarjeta = document.createElement("div"); 
-    tarjeta.className = "card"; 
-    tarjeta.innerHTML = `
+        let tarjeta = document.createElement("div");
+        tarjeta.className = "card";
+        tarjeta.innerHTML = `
                         <img src="../img/Aceites escenciales/${item.nombre}.jpg" class="card-img-top" alt="${item.nombre}">
                         <div class="card-body">
                             <h5 class="card-title">Aceite de ${item.nombre}</h5>
                             <button class="btn btn-primary" id=${item.id}>Agregar al carrito</button>
                             <span class="precio">${item.precio}</span>
-                        </div>`; 
-    contenedor.append(tarjeta);  
-        document.getElementById(`${item.id}`).addEventListener('click', () => comprarProducto(item)); 
+                        </div>`;
+        contenedor.append(tarjeta);
+        document.getElementById(`${item.id}`).addEventListener('click', () => comprarProducto(item));
 
-}})
-
-//Creo el evento de click sobre la bolsa para saber cúal es el contenido del carrito
-/*$("#usuario").on("click", function(e){
-    $('#menu').toggleClass("show");
-});*/
+    }
+})
 
 // Creo la función para guardar el carrito en LocalStorage
-function guardarCarrito (){
-    let productosString = JSON.stringify(productos); 
+function guardarCarrito() {
+    let productosString = JSON.stringify(productos);
     localStorage.setItem("productos", productosString);
-} 
-
-let mensaje = document.getElementById("usuario"); 
-let contador = document.getElementById("contador");
-
-function comprarProducto(item) {
-    if(item.stock == 0) {
-        Swal.fire('El producto está agotado'); 
-    } else {
-        productos.push(item);
-        guardarCarrito();
-        let total = productos.reduce((sum, value)=> (typeof value.precio == "number" ? sum + value.precio : sum), 0); 
-        contador.innerHTML = productos.length;
-        item.stock--;
-
-        let listado = document.getElementById("menu"); 
-        let lista = document.createElement("li");
-        lista.className ="lista_menu";
-        lista.innerHTML = `<div class="img-item">
-        <img src="../img/Aceites escenciales/${item.nombre}.jpg" class="img-cart" alt="${item.nombre}">
-        </div> 
-        <div class="items">
-        Aceite de ${item.nombre} - $${item.precio} 
-        </div>
-        <div class="eliminar"><i class="fas fa-trash"></i></div>`; 
-
-        listado.prepend(lista);  
-        $('.total_precio').html(`TOTAL $${total}`);
-
-        Swal.fire({
-            title:`Se ha agregado Aceite de ${item.nombre} al carrito`
-        })
-
-    } 
-
 }
 
-//Función para obtener los datos guardados del carrito
-function obtenerCarrito () {
-    let productosString = localStorage.getItem("productos"); 
-    let carrito = JSON.parse(productosString) || []; 
-    productos = carrito; 
-    let total = productos.reduce((sum, value)=> (typeof value.precio == "number" ? sum + value.precio : sum), 0); 
-    contador.innerHTML = productos.length;
+//Creo la funcion para guardar los productos seleccionados en el carrito de compras
+let mensaje = document.getElementById("usuario");
+let contador = document.getElementById("contador");
+let texto = $('#empty');
+
+
+
+function comprarProducto(item) {
+    if (item.stock == 0) {
+        Swal.fire('El producto está agotado');
+    } else {
+        productos.push(item);
+        //Recorro el array para obtener los productos sin repetirlos 
+        let productosMap = productos.map(producto => {
+        return [JSON.stringify(producto), producto]
+        });
+        let productoMapArr = new Map(productosMap); // Pares de clave y valor
+        let unicos = [...productoMapArr.values()]; // Conversión a un array
+
+        console.log('Productos únicos: ' + JSON.stringify(unicos));
+        console.log('Carrito completo: '+ JSON.stringify(productos));
+        console.log('Productos únicos: ' + unicos.length);
+        console.log('Carrito completo: '+ productos.length);
+
+
+        let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
+        
+        for (const unico of unicos) {
+            let listado = document.getElementById("menu");
+            let lista = document.createElement("li");
+            lista.className = "lista_menu";
+            lista.innerHTML = `<div id="numItems"></div>
+                            <div class="img-item">
+            <img src="../img/Aceites escenciales/${unico.nombre}.jpg" class="img-cart" alt="${unico.nombre}">
+            </div> 
+            <div class="items">
+            Aceite de ${unico.nombre} - $${unico.precio} 
+            </div>
+            <div class="eliminar"><i class="fas fa-trash"></i></div>`;
     
-    let texto = $('#empty'); 
-    let btn = $('#shop'); 
+            listado.prepend(lista);
+            $('.total_precio').html(`TOTAL $${total}`);
+    
+            Swal.fire({
+                title: `Se ha agregado Aceite de ${unico.nombre} al carrito`
+            })
+        contador.innerHTML = productos.length;
+        item.stock--;
+        guardarCarrito();
+        
+        }
+    }
+}
+
+
+//Función para obtener los datos guardados del carrito
+function obtenerCarrito() {
+    let productosString = localStorage.getItem("productos");
+    let carrito = JSON.parse(productosString) || [];
+    productos = carrito;
+    let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
+    contador.innerHTML = productos.length;
+
+    //Obtengo los objetos repetidos 
+
+    //Recorro el array para obtener los productos sin repetirlos 
+    let productosMap = productos.map(producto => {
+        return [JSON.stringify(producto), producto]
+    });
+    let productoMapArr = new Map(productosMap); // Pares de clave y valor
+    let unicos = [...productoMapArr.values()]; // Conversión a un array
+    
+    console.log(unicos);
+
+    let btn = $('#shop');
 
     if (productosString === null) {
         texto.html("El carrito esta vacio");
         btn.attr("disabled");
-        btn.css({'background-color':'gray', 'border' : '1px solid gray'});
+        btn.css({ 'background-color': 'gray', 'border': '1px solid gray' });
     } else {
-        for(producto of productos) {
-            texto.css({'visibility':'hidden'});
+        for (const unico of unicos) {
+            texto.css({ 'visibility': 'hidden' });
             btn.removeAttr("disabled");
-            let listado = document.getElementById("menu"); 
+            let listado = document.getElementById("menu");
             let lista = document.createElement("li");
-            lista.className ="lista_menu";
+            lista.className = "lista_menu";
             lista.innerHTML = `<div class="img-item">
-            <img src="../img/Aceites escenciales/${producto.nombre}.jpg" class="img-cart" alt="${producto.nombre}">
+            <img src="../img/Aceites escenciales/${unico.nombre}.jpg" class="img-cart" alt="${unico.nombre}">
             </div> 
             <div class="items">
-            Aceite de ${producto.nombre} - $${producto.precio} 
+            Aceite de ${unico.nombre} - $${unico.precio} 
             </div>
-            <div class="eliminar"><i class="fas fa-trash"></i></div>`; 
-            listado.prepend(lista); 
+            <div class="eliminar"><i class="fas fa-trash"></i></div>`;
+            listado.prepend(lista);
             $('.total_precio').html(`Total  $${total}`);
         }
-    
     }
 
 }
