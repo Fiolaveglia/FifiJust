@@ -44,6 +44,36 @@ function guardarCarrito() {
     localStorage.setItem("productos", productosString);
 }
 
+let listado = document.getElementById("menu");
+
+/*function pintarProducto(){
+    let productosMap = productos.map(producto => {
+        return [JSON.stringify(producto), producto]
+        });
+    let productoMapArr = new Map(productosMap); // Pares de clave y valor
+    let unicos = [...productoMapArr.values()]; // Conversión a un array
+    let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
+
+    for (const unico of unicos) {
+        let lista = document.createElement("li");
+        lista.className = "lista_menu";
+        texto.css({ 'visibility': 'hidden' });
+        lista.innerHTML = 
+            `<div id="numItems"></div>
+            <div class="img-item">
+            <img src="../img/Aceites escenciales/${unico.nombre}.jpg" class="img-cart" alt="${unico.nombre}">
+            </div> 
+            <div class="items">
+                Aceite de ${unico.nombre} - $${unico.precio} 
+            </div>
+            <div class="eliminar" onclick = eliminarProducto(${unico.id})><i class="fas fa-trash"></i></div>`;
+        listado.prepend(lista);
+        $('.total_precio').html(`TOTAL $${total}`);
+    }
+
+
+}*/
+
 //Creo la funcion para guardar los productos seleccionados en el carrito de compras
 let mensaje = document.getElementById("usuario");
 let contador = document.getElementById("contador");
@@ -56,8 +86,7 @@ function comprarProducto(item) {
     } else {
         let listado = document.getElementById("menu");
         listado.innerHTML = ""; 
-        let lista = document.createElement("li");
-        lista.className = "lista_menu";
+        
         productos.push(item);
         //Recorro el array para obtener los productos sin repetirlos 
         let productosMap = productos.map(producto => {
@@ -71,50 +100,49 @@ function comprarProducto(item) {
         console.log('Productos únicos: ' + unicos.length);
         console.log('Carrito completo: '+ productos.length);
 
-
         let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
-        
-        
 
         for (const unico of unicos) {
+            let lista = document.createElement("li");
+            lista.className = "lista_menu";
             texto.css({ 'visibility': 'hidden' });
-            lista.innerHTML = `<div id="numItems"></div>
-                            <div class="img-item">
-            <img src="../img/Aceites escenciales/${unico.nombre}.jpg" class="img-cart" alt="${unico.nombre}">
-            </div> 
-            <div class="items">
-            Aceite de ${unico.nombre} - $${unico.precio} 
-            </div>
-            <div class="eliminar"><i class="fas fa-trash"></i></div>`;
-            //Evento de click para eliminar los productos
-            /*document.getElementsByClassName('fa-trash').addEventListener('click', () => eliminarProducto());*/
-            listado.prepend(lista);
-            $('.total_precio').html(`TOTAL $${total}`);
-    
-            Swal.fire({
-                title: `Se ha agregado Aceite de ${unico.nombre} al carrito`
-            })
-        contador.innerHTML = productos.length;
-        item.stock--;
-        guardarCarrito();
+            lista.innerHTML = 
+            `   <div id="numItems"></div>
+                <div class="img-item">
+                    <img src="../img/Aceites escenciales/${unico.nombre}.jpg" class="img-cart" alt="${unico.nombre}">
+                </div> 
+                <div class="items">
+                    Aceite de ${unico.nombre} - $${unico.precio} 
+                </div>
+                <div class="eliminar" onclick = eliminarProducto(${unico.id})><i class="fas fa-trash"></i></div>`;
+                listado.prepend(lista);
+                $('.total_precio').html(`TOTAL $${total}`);
 
+        
+                Swal.fire({
+                    title: `Se ha agregado Aceite de ${unico.nombre} al carrito`
+                })
+                contador.innerHTML = productos.length;
+                item.stock--;
+                guardarCarrito();
         }
     }
 }
 
-/*function eliminarProducto(){
-    
-}*/
+function eliminarProducto(id){
+    console.log(productos);
+}
+
 
 //Función para obtener los datos guardados del carrito
 function obtenerCarrito() {
     let productosString = localStorage.getItem("productos");
     let carrito = JSON.parse(productosString) || [];
     productos = carrito;
+
+    
     let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
     contador.innerHTML = productos.length;
-
-    //Obtengo los objetos repetidos 
 
     //Recorro el array para obtener los productos sin repetirlos 
     let productosMap = productos.map(producto => {
