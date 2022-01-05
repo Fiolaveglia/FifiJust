@@ -46,15 +46,8 @@ function guardarCarrito() {
 
 let listado = document.getElementById("menu");
 
-/*function pintarProducto(){
-    let productosMap = productos.map(producto => {
-        return [JSON.stringify(producto), producto]
-        });
-    let productoMapArr = new Map(productosMap); // Pares de clave y valor
-    let unicos = [...productoMapArr.values()]; // Conversión a un array
-    let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
-
-    for (const unico of unicos) {
+function pintarProductos(arregloProductos){
+    for (const unico of arregloProductos) {
         let lista = document.createElement("li");
         lista.className = "lista_menu";
         texto.css({ 'visibility': 'hidden' });
@@ -68,11 +61,8 @@ let listado = document.getElementById("menu");
             </div>
             <div class="eliminar" onclick = eliminarProducto(${unico.id})><i class="fas fa-trash"></i></div>`;
         listado.prepend(lista);
-        $('.total_precio').html(`TOTAL $${total}`);
     }
-
-
-}*/
+}
 
 //Creo la funcion para guardar los productos seleccionados en el carrito de compras
 let mensaje = document.getElementById("usuario");
@@ -84,10 +74,15 @@ function comprarProducto(item) {
     if (item.stock == 0) {
         Swal.fire('El producto está agotado');
     } else {
+    
         let listado = document.getElementById("menu");
         listado.innerHTML = ""; 
         
         productos.push(item);
+        // Alerta
+        Swal.fire({
+            title: `Se ha agregado Aceite de ${item.nombre} al carrito`
+        })
         //Recorro el array para obtener los productos sin repetirlos 
         let productosMap = productos.map(producto => {
         return [JSON.stringify(producto), producto]
@@ -102,30 +97,10 @@ function comprarProducto(item) {
 
         let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
 
-        for (const unico of unicos) {
-            let lista = document.createElement("li");
-            lista.className = "lista_menu";
-            texto.css({ 'visibility': 'hidden' });
-            lista.innerHTML = 
-            `   <div id="numItems"></div>
-                <div class="img-item">
-                    <img src="../img/Aceites escenciales/${unico.nombre}.jpg" class="img-cart" alt="${unico.nombre}">
-                </div> 
-                <div class="items">
-                    Aceite de ${unico.nombre} - $${unico.precio} 
-                </div>
-                <div class="eliminar" onclick = eliminarProducto(${unico.id})><i class="fas fa-trash"></i></div>`;
-                listado.prepend(lista);
-                $('.total_precio').html(`TOTAL $${total}`);
-
-        
-                Swal.fire({
-                    title: `Se ha agregado Aceite de ${unico.nombre} al carrito`
-                })
-                contador.innerHTML = productos.length;
-                item.stock--;
-                guardarCarrito();
-        }
+        pintarProductos(unicos);
+        contador.innerHTML = productos.length;
+        guardarCarrito();
+        $('.total_precio').html(`TOTAL $${total}`);
     }
 }
 
@@ -140,7 +115,6 @@ function obtenerCarrito() {
     let carrito = JSON.parse(productosString) || [];
     productos = carrito;
 
-    
     let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
     contador.innerHTML = productos.length;
 
@@ -161,25 +135,12 @@ function obtenerCarrito() {
         btn.attr("disabled");
         btn.css({ 'background-color': 'gray', 'border': '1px solid gray' });
     } else {
-        for (const unico of unicos) {
-            texto.css({ 'visibility': 'hidden' });
-            btn.removeAttr("disabled");
-            let listado = document.getElementById("menu");
-            let lista = document.createElement("li");
-            lista.className = "lista_menu";
-            lista.innerHTML = `<div class="img-item">
-            <img src="../img/Aceites escenciales/${unico.nombre}.jpg" class="img-cart" alt="${unico.nombre}">
-            </div> 
-            <div class="items">
-            Aceite de ${unico.nombre} - $${unico.precio} 
-            </div>
-            <div class="eliminar"><i class="fas fa-trash"></i></div>`;
-            listado.prepend(lista);
-            $('.total_precio').html(`Total  $${total}`);
-        }
+        pintarProductos(unicos);
+        $('.total_precio').html(`Total  $${total}`);
     }
 
 }
 
 obtenerCarrito();
+
 
