@@ -50,11 +50,14 @@ let contador = document.getElementById("contador");
 let texto = $('#empty');
 
 
-
 function comprarProducto(item) {
     if (item.stock == 0) {
         Swal.fire('El producto está agotado');
     } else {
+        let listado = document.getElementById("menu");
+        listado.innerHTML = ""; 
+        let lista = document.createElement("li");
+        lista.className = "lista_menu";
         productos.push(item);
         //Recorro el array para obtener los productos sin repetirlos 
         let productosMap = productos.map(producto => {
@@ -71,10 +74,10 @@ function comprarProducto(item) {
 
         let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
         
+        
+
         for (const unico of unicos) {
-            let listado = document.getElementById("menu");
-            let lista = document.createElement("li");
-            lista.className = "lista_menu";
+            texto.css({ 'visibility': 'hidden' });
             lista.innerHTML = `<div id="numItems"></div>
                             <div class="img-item">
             <img src="../img/Aceites escenciales/${unico.nombre}.jpg" class="img-cart" alt="${unico.nombre}">
@@ -83,7 +86,8 @@ function comprarProducto(item) {
             Aceite de ${unico.nombre} - $${unico.precio} 
             </div>
             <div class="eliminar"><i class="fas fa-trash"></i></div>`;
-    
+            //Evento de click para eliminar los productos
+            /*document.getElementsByClassName('fa-trash').addEventListener('click', () => eliminarProducto());*/
             listado.prepend(lista);
             $('.total_precio').html(`TOTAL $${total}`);
     
@@ -93,11 +97,14 @@ function comprarProducto(item) {
         contador.innerHTML = productos.length;
         item.stock--;
         guardarCarrito();
-        
+
         }
     }
 }
 
+/*function eliminarProducto(){
+    
+}*/
 
 //Función para obtener los datos guardados del carrito
 function obtenerCarrito() {
@@ -116,7 +123,8 @@ function obtenerCarrito() {
     let productoMapArr = new Map(productosMap); // Pares de clave y valor
     let unicos = [...productoMapArr.values()]; // Conversión a un array
     
-    console.log(unicos);
+    console.log('todos:' + JSON.stringify(productos))
+    console.log('sin repetir:' + JSON.stringify(unicos));
 
     let btn = $('#shop');
 
@@ -146,7 +154,4 @@ function obtenerCarrito() {
 }
 
 obtenerCarrito();
-
-
-
 
