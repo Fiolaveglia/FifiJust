@@ -46,6 +46,7 @@ function guardarCarrito() {
 
 let listado = document.getElementById("menu");
 
+//Creo la función para pintar productos en el menú vertical 
 function pintarProductos(arregloProductos){
     for (const unico of arregloProductos) {
         let lista = document.createElement("li");
@@ -64,44 +65,47 @@ function pintarProductos(arregloProductos){
     }
 }
 
-//Creo la funcion para guardar los productos seleccionados en el carrito de compras
 let mensaje = document.getElementById("usuario");
 let contador = document.getElementById("contador");
 let texto = $('#empty');
 
-
+//Función que agrega productos al carrito de compras
 function comprarProducto(item) {
-    if (item.stock == 0) {
-        Swal.fire('El producto está agotado');
-    } else {
+
+    const productoExistente = productos.find(product => product.nombre === `${item.nombre}`) ; 
+    console.log(productoExistente);
     
-        let listado = document.getElementById("menu");
-        listado.innerHTML = ""; 
-        
+    if (productoExistente === undefined) {
         productos.push(item);
-        // Alerta
+        //Aleta 
         Swal.fire({
             title: `Se ha agregado Aceite de ${item.nombre} al carrito`
         })
+        let listado = document.getElementById("menu");
+        listado.innerHTML = ""; 
+
         //Recorro el array para obtener los productos sin repetirlos 
         let productosMap = productos.map(producto => {
         return [JSON.stringify(producto), producto]
         });
         let productoMapArr = new Map(productosMap); // Pares de clave y valor
         let unicos = [...productoMapArr.values()]; // Conversión a un array
-
-        console.log('Productos únicos: ' + JSON.stringify(unicos));
-        console.log('Carrito completo: '+ JSON.stringify(productos));
-        console.log('Productos únicos: ' + unicos.length);
-        console.log('Carrito completo: '+ productos.length);
-
+        
         let total = productos.reduce((sum, value) => (typeof value.precio == "number" ? sum + value.precio : sum), 0);
-
         pintarProductos(unicos);
         contador.innerHTML = productos.length;
         guardarCarrito();
         $('.total_precio').html(`TOTAL $${total}`);
+
+    } else if (productoExistente.id === item.id) {
+        Swal.fire({
+            title: `El producto ya se encuentra en el carrito`
+        })
     }
+
+    if (item.stock == 0) {
+        Swal.fire('El producto está agotado');
+    } 
 }
 
 function eliminarProducto(id){
