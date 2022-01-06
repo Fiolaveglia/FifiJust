@@ -71,7 +71,7 @@ let texto = $('#empty');
 
 //Función que agrega productos al carrito de compras
 function comprarProducto(item) {
-
+    let btnComprar = document.getElementById(`${item.id}`); 
     const productoExistente = productos.find(product => product.nombre === `${item.nombre}`) ; 
     console.log(productoExistente);
     
@@ -101,6 +101,10 @@ function comprarProducto(item) {
         Swal.fire({
             title: `El producto ya se encuentra en el carrito`
         })
+        btnComprar.setAttribute("disabled", "");
+        btnComprar.style.backgroundColor = 'gray';
+        btnComprar.style.border = '1px solid gray';
+        
     }
 
     if (item.stock == 0) {
