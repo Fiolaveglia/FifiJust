@@ -60,10 +60,29 @@ function pintarProductos(arregloProductos){
             <div class="items">
                 Aceite de ${unico.nombre} - $${unico.precio} 
             </div>
-            <div class="eliminar" onclick = eliminarProducto(${unico.id})><i class="fas fa-trash"></i></div>`;
+            <div class="eliminar" id="eliminarProducto${unico.id}"><i class="fas fa-trash"></i></div>`;
         listado.prepend(lista);
+
+        let eliminarProducto = document.getElementById(`eliminarProducto${unico.id}`)
+        eliminarProducto.addEventListener('click', ()=>{
+            eliminarProducto.parentElement.remove()
+            productos= productos.filter(item => item.id != unico.id); 
+            contador.innerHTML = productos.length;
+            guardarCarrito()
+            Swal.fire({
+                title: `El producto se ha eliminado`
+            }),
+            actualizar();
+            guardarCarrito();
+        })
     }
 }
+
+function actualizar(){
+    let total = productos.reduce((acc, item)=> acc + item.precio, 0)
+    $('.total_precio').html(`TOTAL $${total}`);
+}
+
 
 let mensaje = document.getElementById("usuario");
 let contador = document.getElementById("contador");
@@ -73,11 +92,11 @@ let texto = $('#empty');
 function comprarProducto(item) {
     let btnComprar = document.getElementById(`${item.id}`); 
     const productoExistente = productos.find(product => product.nombre === `${item.nombre}`) ; 
-    console.log(productoExistente);
+    //console.log(productoExistente);
     
     if (productoExistente === undefined) {
         productos.push(item);
-        //Aleta 
+        //Alerta 
         Swal.fire({
             title: `Se ha agregado Aceite de ${item.nombre} al carrito`
         })
@@ -104,7 +123,6 @@ function comprarProducto(item) {
         btnComprar.setAttribute("disabled", "");
         btnComprar.style.backgroundColor = 'gray';
         btnComprar.style.border = '1px solid gray';
-        
     }
 
     if (item.stock == 0) {
@@ -112,9 +130,6 @@ function comprarProducto(item) {
     } 
 }
 
-function eliminarProducto(id){
-    console.log(productos);
-}
 
 
 //Función para obtener los datos guardados del carrito
@@ -133,9 +148,8 @@ function obtenerCarrito() {
     let productoMapArr = new Map(productosMap); // Pares de clave y valor
     let unicos = [...productoMapArr.values()]; // Conversión a un array
     
-    console.log('todos:' + JSON.stringify(productos))
-    console.log('sin repetir:' + JSON.stringify(unicos));
 
+    //Boton para finalizar la compra 
     let btn = $('#shop');
 
     if (productosString === null) {
@@ -150,5 +164,15 @@ function obtenerCarrito() {
 }
 
 obtenerCarrito();
+
+let checkOut = document.getElementById("shop"); 
+checkOut.addEventListener('click', ()=>{
+    checkOut.style.display="none"; 
+    Swal.fire('Su compra ha sido finalizada');
+    listado.innerHTML = ""; 
+    productos=[]; 
+    localStorage.clear(); 
+    actualizar(); 
+})
 
 
